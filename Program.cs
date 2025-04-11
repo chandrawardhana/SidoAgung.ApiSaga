@@ -79,7 +79,10 @@ app.UseRequestLogging();
 app.UseApiPerformanceTracking();
 
 app.UseCors("AllowAll");
+app.UseAuthentication();
 app.UseAuthorization();
+//app.UseJwtBlacklist();
+
 app.MapControllers();
 
 app.Run();
