@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastruktur\Middlewares\**" />
+    <Content Remove="Infrastruktur\Middlewares\**" />
+    <EmbeddedResource Remove="Infrastruktur\Middlewares\**" />
+    <None Remove="Infrastruktur\Middlewares\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.11.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.3.0" />

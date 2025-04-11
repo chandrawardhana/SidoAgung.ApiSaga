@@ -1,6 +1,6 @@
 @SidoAgung.ApiSaga_HostAddress = http://localhost:5287
 
-GET {{SidoAgung.ApiSaga_HostAddress}}/weatherforecast/
+GET {{SidoAgung.ApiSaga_HostAddress}}/api/Customer/
 Accept: application/json
 
 ###

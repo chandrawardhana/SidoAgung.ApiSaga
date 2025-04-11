@@ -11,7 +11,7 @@ using SidoAgung.ApiSaga.Infrastruktur.Persistences;
 namespace SidoAgung.ApiSaga.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250317021335_InitialCreate")]
+    [Migration("20250317022747_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -43,31 +43,6 @@ namespace SidoAgung.ApiSaga.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("SidoAgung.ApiSaga.Infrastruktur.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("PasswordHash")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

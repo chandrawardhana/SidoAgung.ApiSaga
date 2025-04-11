@@ -5,6 +5,7 @@ using SidoAgung.ApiSaga.Infrastruktur.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using SidoAgung.ApiSaga.Infrastruktur.Middleware;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -71,6 +72,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseGlobalExceptionHandler();
+app.UseSecurityHeaders();
+app.UseRequestLogging();
+app.UseApiPerformanceTracking();
 
 app.UseCors("AllowAll");
 app.UseAuthorization();
