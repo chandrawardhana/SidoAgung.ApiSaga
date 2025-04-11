@@ -11,8 +11,8 @@ using SidoAgung.ApiSaga.Infrastruktur.Persistences;
 namespace SidoAgung.ApiSaga.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250317022747_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250411042147_AddSagaDBSet")]
+    partial class AddSagaDBSet
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
