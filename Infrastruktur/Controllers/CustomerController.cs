@@ -18,10 +18,12 @@ namespace SidoAgung.ApiSaga.Infrastruktur.Controllers;
         }
 
         [HttpGet]
+         //[ResponseCache(Duration = 60, VaryByQueryKeys = new[] { "*" })]
         public async Task<IEnumerable<CustomerModel>> GetCustomers() =>
             await _customerRepository.GetCustomers();
 
         [HttpGet("{id}")]
+         //[ResponseCache(Duration = 30, VaryByQueryKeys = new[] { "id" })]
         public async Task<ActionResult<CustomerModel>> GetCustomer(int id)
         {
             var customer = await _customerRepository.GetCustomerById(id);

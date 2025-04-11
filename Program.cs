@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using SidoAgung.ApiSaga.Infrastruktur.Middleware;
+using Microsoft.AspNetCore.HttpOverrides;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Tambahkan Repository
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<AuthService>();
+
+builder.Services.AddResponseCaching(options =>
+{
+    options.MaximumBodySize = 1024; // Ukuran maksimum cache dalam bytes
+    options.UseCaseSensitivePaths = true; 
+});
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var key = Encoding.UTF8.GetBytes(jwtSettings["Key"]);
@@ -66,23 +73,35 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
 }
 
+// Middleware
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 app.UseGlobalExceptionHandler();
+app.UseCustomHttpsRedirection();
+app.UseCustomCompression(); //Gzip Compresion
 app.UseSecurityHeaders();
 app.UseRequestLogging();
 app.UseApiPerformanceTracking();
 
-app.UseCors("AllowAll");
+app.UseRateLimiter();
+app.UseCustomRouting();
+app.UseCors("AllowSpecificOrigin"); // Buat policy CORS
+//app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 //app.UseJwtBlacklist();
-
+app.UseExceptionHandler("/error"); // Endpoint error custom
+app.UseWebSockets();
 app.MapControllers();
-
+//app.UseHsts();
 app.Run();
