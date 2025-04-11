@@ -66,7 +66,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "SidoAgung API SAGA Mobile", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "SidoAgung API SAGA", Version = "v1" });
 });
 
 builder.Services.AddControllers();
@@ -93,7 +93,7 @@ app.UseSecurityHeaders();
 app.UseRequestLogging();
 app.UseApiPerformanceTracking();
 
-app.UseRateLimiter();
+//app.UseRateLimiter();
 app.UseCustomRouting();
 app.UseCors("AllowSpecificOrigin"); // Buat policy CORS
 //app.UseCors("AllowAll");
