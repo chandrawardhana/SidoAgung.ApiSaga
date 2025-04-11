@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.IdentityModel.Tokens.Jwt;
 using SidoAgung.ApiSaga.Infrastruktur.Models;
 
-[Route("api/auth")]
+[Route("wongnormal/auth")]
 [ApiController]
 public class AuthController : ControllerBase
 {

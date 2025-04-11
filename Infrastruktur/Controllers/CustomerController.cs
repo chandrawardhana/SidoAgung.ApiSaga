@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SidoAgung.ApiSaga.Infrastruktur.Controllers;
-    [Route("api/[controller]")]
+    [Route("wongnormal/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
