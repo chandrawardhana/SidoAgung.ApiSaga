@@ -7,6 +7,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using SidoAgung.ApiSaga.Infrastruktur.Middleware;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.Extensions.DependencyInjection;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -86,14 +87,21 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
 
+//builder.Services.AddRateLimiter(options =>
+//{
+//    options.RequestLimit = 150; // Maksimal 150 request
+//    options.WindowMinutes = 15; // Dalam periode 15 menit
+//    options.IncludeClientIpInKey = true; // Batasi berdasarkan IP
+//});
+
 app.UseGlobalExceptionHandler();
 app.UseCustomHttpsRedirection();
 app.UseCustomCompression(); //Gzip Compresion
 app.UseSecurityHeaders();
 app.UseRequestLogging();
 app.UseApiPerformanceTracking();
-
 //app.UseRateLimiter();
+
 app.UseCustomRouting();
 app.UseCors("AllowSpecificOrigin"); // Buat policy CORS
 //app.UseCors("AllowAll");
